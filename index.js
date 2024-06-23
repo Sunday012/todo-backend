@@ -9,13 +9,22 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const middleware = require('./middleware/auth')
 
 //middleware
+app.use(cors())
+
+const allowedOrigins = ['https://todo-app-weld-six.vercel.app', 'http://http://localhost:5173']; 
 app.use(cors({
-  origin: "https://todo-app-weld-six.vercel.app/" || "http://localhost:5000"
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
 }));
 app.use(express.json());
 
 
-//Auth Routes//
+//Auth Route//
 app.use("/api/auth", auth)
 
 //Routes//
