@@ -49,7 +49,7 @@ app.get("/todo", middleware, async (req,res) => {
 
   try {
     const userId = req.user.id;
-    const allTodo = await pool.query("SELECT * FROM todo user_id = $1", [userId])
+    const allTodo = await pool.query("SELECT * FROM todo WHERE user_id = $1", [userId])
 
     res.json(allTodo)
   } catch (error) {
