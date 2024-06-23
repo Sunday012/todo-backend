@@ -29,28 +29,28 @@ router.post("/register", async (req,res) => {
   //Login route//
   
   router.post("/login", async (req, res) => {
-  const {email, password} = req.body;
-    try{
-  
-      const user = await pool.query("SELECT * FROM users WHERE email = $1", [email])
-      if(user.rows.length === 0){
-        res.status(400).json({msg: "Invalid username or password"})
+    const { email, password } = req.body;
+    try {
+      const user = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+      if (user.rows.length === 0) {
+        return res.status(400).json({ msg: "Invalid username or password" });
       }
   
       const validPassword = await argon2.verify(user.rows[0].password, password);
-  
       if (!validPassword) {
         return res.status(401).json({ message: 'Invalid username or password' });
       }
   
-      const payload = {id: user.rows[0].user_id, username: user.rows[0].username}
-      const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '24h' });
-      res.json({token});
-    }catch(err){
+      const payload = { id: user.rows[0].user_id, username: user.rows[0].username };
+      const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "24h" });
+  
+      res.json({ token });
+      console.log({ token });
+    } catch (err) {
       console.error(err);
       res.status(500).json({ message: 'Error logging in' });
     }
-  })
+  });
 
   router.get("/user", async (req,res) => {
     const {email} = req.params;
