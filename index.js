@@ -11,7 +11,7 @@ const middleware = require('./middleware/auth')
 //middleware
 app.use(cors())
 
-const allowedOrigins = ['https://todo-app-weld-six.vercel.app', 'http://http://localhost:5173']; 
+const allowedOrigins = ['https://todo-app-weld-six.vercel.app', 'http://localhost:5173']; 
 app.use(cors({
   origin: function(origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
