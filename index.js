@@ -9,7 +9,9 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const middleware = require('./middleware/auth')
 
 //middleware
-app.use(cors());
+app.use(cors({
+  origin: "https://todo-app-weld-six.vercel.app/"
+}));
 app.use(express.json());
 
 
