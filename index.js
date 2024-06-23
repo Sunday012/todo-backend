@@ -10,7 +10,7 @@ const middleware = require('./middleware/auth')
 
 //middleware
 app.use(cors({
-  origin: "https://todo-app-weld-six.vercel.app/"
+  origin: "https://todo-app-weld-six.vercel.app/" || "http://localhost:5000"
 }));
 app.use(express.json());
 
