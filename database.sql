@@ -1,0 +1,20 @@
+CREATE DATABASE todoapp;
+
+CREATE TABLE todo(
+    todo_id SERIAL PRIMARY KEY,
+    description VARCHAR(255),
+    title VARCHAR(20),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+ALTER TABLE todo ADD COLUMN(
+    title VARCHAR(20),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE users(
+    user_id SERIAL PRIMARY KEY,
+    username VARCHAR(20),
+    password VARCHAR(20),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    email VARCHAR(20) NOT NULL UNIQUE,
+);
